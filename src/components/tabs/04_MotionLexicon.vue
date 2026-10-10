@@ -56,22 +56,22 @@
           <!-- 沙盒 2: 阶梯交错淡入 -->
           <div v-else-if="motion.sandboxType === 'stagger-list'" class="w-full max-w-xs space-y-1.5 font-mono-code text-xs">
             <div class="flex justify-between items-center mb-1">
-              <span class="text-[10px] text-[#717d93]">级联入场序列</span>
+              <span class="text-[10px] text-[#717d93]">级联入场序列 (75ms 阶梯延迟)</span>
               <button
                 @click="replayStagger"
-                class="text-[9px] text-[#10b981] hover:underline cursor-pointer"
+                class="px-2 py-0.5 bg-[#171c26] border border-[#10b981]/50 text-[10px] text-[#10b981] hover:bg-[#10b981] hover:text-black transition-colors cursor-pointer font-bold"
               >
                 ↻ 重播入场
               </button>
             </div>
             <div
               v-for="(item, idx) in staggerItems"
-              :key="idx"
-              class="bg-[#171c26] border border-[#2b3548] px-3 py-1 text-[11px] text-[#cbd5e1] transition-all duration-300"
-              :class="staggerTriggered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-              :style="{ transitionDelay: `${idx * 60}ms` }"
+              :key="`${staggerKey}-${idx}`"
+              class="bg-[#171c26] border border-[#2b3548] px-3 py-1.5 text-[11px] text-[#cbd5e1] flex items-center justify-between stagger-reveal-node shadow-sm"
+              :style="{ animationDelay: `${idx * 75}ms` }"
             >
-              子项 {{ idx + 1 }} // {{ item }}
+              <span>子项 0{{ idx + 1 }} // {{ item }}</span>
+              <span class="text-[9px] text-[#10b981] font-mono-code font-bold">+{{ idx * 75 }}ms</span>
             </div>
           </div>
 
@@ -217,12 +217,9 @@ const { addItem, copyToClipboard } = usePromptDock();
 
 // Stagger 列表项状态
 const staggerItems = ['卡片容器甲板', '遥测状态标头', '硬件指标计量表'];
-const staggerTriggered = ref(true);
+const staggerKey = ref(0);
 const replayStagger = () => {
-  staggerTriggered.value = false;
-  setTimeout(() => {
-    staggerTriggered.value = true;
-  }, 80);
+  staggerKey.value++;
 };
 
 // 3D 视差倾角状态
@@ -278,6 +275,21 @@ const addMotionToDock = (motion) => {
 </script>
 
 <style scoped>
+@keyframes staggerRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-reveal-node {
+  animation: staggerRevealUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @keyframes marqueeScroll {
   from { transform: translateX(0%); }
   to { transform: translateX(-50%); }

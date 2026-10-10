@@ -86,12 +86,12 @@ import GlobalSearchModal from './components/GlobalSearchModal.vue';
 import ToastNotification from './components/ToastNotification.vue';
 
 // Tab 视图组件
-import ComponentVisualIndex from './components/tabs/ComponentVisualIndex.vue';
-import AestheticsGenerator from './components/tabs/AestheticsGenerator.vue';
-import PaletteSystem from './components/tabs/PaletteSystem.vue';
-import MotionLexicon from './components/tabs/MotionLexicon.vue';
-import IconifySearch from './components/tabs/IconifySearch.vue';
-import TypeSpecimenSandbox from './components/tabs/TypeSpecimenSandbox.vue';
+import ComponentVisualIndex from './components/tabs/01_ComponentVisualIndex.vue';
+import AestheticsGenerator from './components/tabs/02_AestheticsGenerator.vue';
+import PaletteSystem from './components/tabs/03_PaletteSystem.vue';
+import MotionLexicon from './components/tabs/04_MotionLexicon.vue';
+import IconifySearch from './components/tabs/05_IconifySearch.vue';
+import TypeSpecimenSandbox from './components/tabs/06_TypeSpecimenSandbox.vue';
 
 const { activeTab } = usePromptDock();
 </script>

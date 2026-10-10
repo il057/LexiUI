@@ -105,3 +105,23 @@
   background-image: radial-gradient(#333b48 1px, transparent 1px);
   background-size: 8px 8px;
 }
+
+/* Shimmer gradient wave animation for skeletons */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(204, 255, 0, 0.12) 50%, transparent 100%);
+  animation: shimmer-sweep 1.8s infinite ease-in-out;
+}
